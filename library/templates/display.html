@@ -1,0 +1,51 @@
+<h2>Available Books</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>edit/delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+            {% if book.status %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.des }}</td>
+                    <td><img src="{{ book.img.url }}" alt="Book Image" style="max-width: 100px;"></td>
+                    <td><a href="{% url 'edit' book.id %}">edit</a> //<a href="{% url 'delete' book.id %}">delete</a></td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Not Available Books</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Description</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+            {% if not book.status %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.des }}</td>
+                    <td><img src="{{ book.img.url }}" alt="Book Image" style="max-width: 100px;"></td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'logout' %}">Logout</a>
